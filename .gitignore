@@ -1,0 +1,4 @@
+id_centos7
+id_centos7.pub
+.vagrant/*
+package.box
