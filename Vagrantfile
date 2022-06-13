@@ -66,8 +66,9 @@ Vagrant.configure("2") do |config|
    config.vm.provision "shell", inline: <<-SHELL
     sudo curl -o /etc/yum.repos.d/konimex-neofetch-epel-7.repo https://copr.fedorainfracloud.org/coprs/konimex/neofetch/repo/epel-7/konimex-neofetch-epel-7.repo
     sudo yum update -y
-    programas=( httpd
-		epel-release
+    programas=( epel-release
+		nginx
+		httpd
 		neofetch
 		fish )
 						
