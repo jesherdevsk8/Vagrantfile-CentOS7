@@ -1,0 +1,22 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "jesherpinkman/Centos7"
+  config.vm.network "forwarded_port", guest: 80, host: 8089
+  config.vm.network "public_network"
+
+config.vm.provision "shell", inline: <<-SHELL
+    sudo curl -o /etc/yum.repos.d/konimex-neofetch-epel-7.repo https://copr.fedorainfracloud.org/coprs/konimex/neofetch/repo/epel-7/konimex-neofetch-epel-7.repo
+    sudo yum update -y
+    programas=( epel-release
+                nginx
+                httpd
+                neofetch
+                fish )
+
+    for i in ${programas[@]}; do sudo yum install ${i[@]} -y; done
+    sudo yum update -y
+
+    sudo systemctl start httpd
+    sudo usermod -s /bin/fish root
+    sudo usermod -s /bin/fish vagrant
+   SHELL
+end
